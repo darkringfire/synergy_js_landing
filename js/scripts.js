@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('section');
 
     sections.forEach((section) => {
-      if (window.scrollY >= section.offsetTop) {
+      const sectionOffset = 150;
+      if (window.scrollY >= section.offsetTop - sectionOffset) {
         // console.log(window.scrollY + ' >= ' + section.offsetTop + ' #' + section.id);
         links.forEach((link) => {
           link.classList.remove('active');
