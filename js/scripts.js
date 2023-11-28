@@ -25,7 +25,51 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  const animItems = document.querySelectorAll('.animate');
+  function onEntry(params) {
+    animItems.forEach((item) => {
+      const itemHeight = item.offsetHeight;
+      const itemOffset = item.offsetTop;
+      const startPos = 2;
+
+      const clientHeight = document.documentElement.clientHeight;
+      const animPoint = clientHeight - Math.min(itemHeight, clientHeight) / startPos;
+
+      const scrollY = window.scrollY;
+
+      if (scrollY > itemOffset - animPoint && scrollY < itemOffset + itemHeight) {
+        item.classList.add('show');
+      } else {
+        if (!item.classList.contains('no-hide')) {
+          item.classList.remove('show');
+        }
+      }
+    });
+  }
+  // function onEntry(entry) {
+  //   entry.forEach((item) => {
+  //     if (item.isIntersecting) {
+  //       item.target.classList.add('show');
+  //     } else {
+  //       if (!item.target.classList.contains('no-hide')) {
+  //         item.target.classList.remove('show');
+  //       }
+  //     }
+  //   });
+  // }
+  // let options = { threshold: 0.5 };
+  // let observer = new IntersectionObserver(onEntry, options);
+  // animItems.forEach((item) => {
+  //   observer.observe(item);
+  // });
+
   navInit();
-  window.addEventListener('scroll', navInit);
-  window.addEventListener('resize', navInit);
+  onEntry();
+  window.addEventListener('scroll', () => {
+    navInit();
+    onEntry();
+  });
+  window.addEventListener('resize', () => {
+    navInit();
+  });
 });

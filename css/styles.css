@@ -11698,3 +11698,23 @@ body {
 .footer {
   padding: 5rem 0;
 }
+
+.animate.hide {
+  opacity: 0;
+}
+
+.animate.down {
+  transform: translateY(100%);
+}
+
+.animate.left50 {
+  transform: translateX(-50%);
+}
+
+.animate.show {
+  opacity: 1;
+  transform: translateX(0);
+  transform: translateY(0);
+  transition: all 1s;
+}
+
